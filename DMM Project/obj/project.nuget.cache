@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "200JtbE3lqc=",
+  "dgSpecHash": "zILQC9ucjBQ=",
   "success": true,
-  "projectFilePath": "C:\\Users\\admin\\Desktop\\Проект ДММ\\DM_Project_5\\DMM Project\\DMM Project.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "/Users/vladyslavtkachenko/Library/Mobile Documents/com~apple~CloudDocs/KSE/Дискретна математика/DM_Project_5/DMM Project/DMM Project.csproj",
+  "expectedPackageFiles": [
+    "/Users/vladyslavtkachenko/.nuget/packages/microsoft.netcore.app.ref/8.0.11/microsoft.netcore.app.ref.8.0.11.nupkg.sha512",
+    "/Users/vladyslavtkachenko/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.11/microsoft.aspnetcore.app.ref.8.0.11.nupkg.sha512",
+    "/Users/vladyslavtkachenko/.nuget/packages/microsoft.netcore.app.host.osx-arm64/8.0.11/microsoft.netcore.app.host.osx-arm64.8.0.11.nupkg.sha512"
+  ],
   "logs": []
 }
