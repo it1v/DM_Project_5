@@ -1,0 +1,45 @@
+C:/Users/admin/Desktop/Проект ДММ/DM_Project_5/DMM Project/obj/Debug/net8.0/DMM Project.GeneratedMSBuildEditorConfig.editorconfig
+C:/Users/admin/Desktop/Проект ДММ/DM_Project_5/DMM Project/obj/Debug/net8.0/DMM Project.AssemblyInfoInputs.cache
+C:/Users/admin/Desktop/Проект ДММ/DM_Project_5/DMM Project/obj/Debug/net8.0/DMM Project.AssemblyInfo.cs
+C:/Users/admin/Desktop/Проект ДММ/DM_Project_5/DMM Project/obj/Debug/net8.0/DMM Project.csproj.CoreCompileInputs.cache
+C:/Users/admin/Desktop/Проект ДММ/DM_Project_5/DMM Project/obj/Debug/net8.0/DMM Project.sourcelink.json
+C:/Users/admin/Desktop/Проект ДММ/DM_Project_5/DMM Project/bin/Debug/net8.0/DMM Project.exe
+C:/Users/admin/Desktop/Проект ДММ/DM_Project_5/DMM Project/bin/Debug/net8.0/DMM Project.deps.json
+C:/Users/admin/Desktop/Проект ДММ/DM_Project_5/DMM Project/bin/Debug/net8.0/DMM Project.runtimeconfig.json
+C:/Users/admin/Desktop/Проект ДММ/DM_Project_5/DMM Project/bin/Debug/net8.0/DMM Project.dll
+C:/Users/admin/Desktop/Проект ДММ/DM_Project_5/DMM Project/bin/Debug/net8.0/DMM Project.pdb
+C:/Users/admin/Desktop/Проект ДММ/DM_Project_5/DMM Project/obj/Debug/net8.0/DMM Project.dll
+C:/Users/admin/Desktop/Проект ДММ/DM_Project_5/DMM Project/obj/Debug/net8.0/refint/DMM Project.dll
+C:/Users/admin/Desktop/Проект ДММ/DM_Project_5/DMM Project/obj/Debug/net8.0/DMM Project.pdb
+C:/Users/admin/Desktop/Проект ДММ/DM_Project_5/DMM Project/obj/Debug/net8.0/DMM Project.genruntimeconfig.cache
+C:/Users/admin/Desktop/Проект ДММ/DM_Project_5/DMM Project/obj/Debug/net8.0/ref/DMM Project.dll
+/Users/vladyslavtkachenko/Library/Mobile Documents/com~apple~CloudDocs/KSE/Дискретна математика/DM_Project_5/DMM Project/bin/Debug/net8.0/DMM Project
+/Users/vladyslavtkachenko/Library/Mobile Documents/com~apple~CloudDocs/KSE/Дискретна математика/DM_Project_5/DMM Project/bin/Debug/net8.0/DMM Project.deps.json
+/Users/vladyslavtkachenko/Library/Mobile Documents/com~apple~CloudDocs/KSE/Дискретна математика/DM_Project_5/DMM Project/bin/Debug/net8.0/DMM Project.runtimeconfig.json
+/Users/vladyslavtkachenko/Library/Mobile Documents/com~apple~CloudDocs/KSE/Дискретна математика/DM_Project_5/DMM Project/bin/Debug/net8.0/DMM Project.dll
+/Users/vladyslavtkachenko/Library/Mobile Documents/com~apple~CloudDocs/KSE/Дискретна математика/DM_Project_5/DMM Project/bin/Debug/net8.0/DMM Project.pdb
+/Users/vladyslavtkachenko/Library/Mobile Documents/com~apple~CloudDocs/KSE/Дискретна математика/DM_Project_5/DMM Project/obj/Debug/net8.0/DMM Project.GeneratedMSBuildEditorConfig.editorconfig
+/Users/vladyslavtkachenko/Library/Mobile Documents/com~apple~CloudDocs/KSE/Дискретна математика/DM_Project_5/DMM Project/obj/Debug/net8.0/DMM Project.AssemblyInfoInputs.cache
+/Users/vladyslavtkachenko/Library/Mobile Documents/com~apple~CloudDocs/KSE/Дискретна математика/DM_Project_5/DMM Project/obj/Debug/net8.0/DMM Project.AssemblyInfo.cs
+/Users/vladyslavtkachenko/Library/Mobile Documents/com~apple~CloudDocs/KSE/Дискретна математика/DM_Project_5/DMM Project/obj/Debug/net8.0/DMM Project.csproj.CoreCompileInputs.cache
+/Users/vladyslavtkachenko/Library/Mobile Documents/com~apple~CloudDocs/KSE/Дискретна математика/DM_Project_5/DMM Project/obj/Debug/net8.0/DMM Project.sourcelink.json
+/Users/vladyslavtkachenko/Library/Mobile Documents/com~apple~CloudDocs/KSE/Дискретна математика/DM_Project_5/DMM Project/obj/Debug/net8.0/DMM Project.dll
+/Users/vladyslavtkachenko/Library/Mobile Documents/com~apple~CloudDocs/KSE/Дискретна математика/DM_Project_5/DMM Project/obj/Debug/net8.0/refint/DMM Project.dll
+/Users/vladyslavtkachenko/Library/Mobile Documents/com~apple~CloudDocs/KSE/Дискретна математика/DM_Project_5/DMM Project/obj/Debug/net8.0/DMM Project.pdb
+/Users/vladyslavtkachenko/Library/Mobile Documents/com~apple~CloudDocs/KSE/Дискретна математика/DM_Project_5/DMM Project/obj/Debug/net8.0/DMM Project.genruntimeconfig.cache
+/Users/vladyslavtkachenko/Library/Mobile Documents/com~apple~CloudDocs/KSE/Дискретна математика/DM_Project_5/DMM Project/obj/Debug/net8.0/ref/DMM Project.dll
+C:\Users\admin\Desktop\Інша гілка\DM_Project_5\DMM Project\bin\Debug\net8.0\DMM Project.exe
+C:\Users\admin\Desktop\Інша гілка\DM_Project_5\DMM Project\bin\Debug\net8.0\DMM Project.deps.json
+C:\Users\admin\Desktop\Інша гілка\DM_Project_5\DMM Project\bin\Debug\net8.0\DMM Project.runtimeconfig.json
+C:\Users\admin\Desktop\Інша гілка\DM_Project_5\DMM Project\bin\Debug\net8.0\DMM Project.dll
+C:\Users\admin\Desktop\Інша гілка\DM_Project_5\DMM Project\bin\Debug\net8.0\DMM Project.pdb
+C:\Users\admin\Desktop\Інша гілка\DM_Project_5\DMM Project\obj\Debug\net8.0\DMM Project.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\admin\Desktop\Інша гілка\DM_Project_5\DMM Project\obj\Debug\net8.0\DMM Project.AssemblyInfoInputs.cache
+C:\Users\admin\Desktop\Інша гілка\DM_Project_5\DMM Project\obj\Debug\net8.0\DMM Project.AssemblyInfo.cs
+C:\Users\admin\Desktop\Інша гілка\DM_Project_5\DMM Project\obj\Debug\net8.0\DMM Project.csproj.CoreCompileInputs.cache
+C:\Users\admin\Desktop\Інша гілка\DM_Project_5\DMM Project\obj\Debug\net8.0\DMM Project.sourcelink.json
+C:\Users\admin\Desktop\Інша гілка\DM_Project_5\DMM Project\obj\Debug\net8.0\DMM Project.dll
+C:\Users\admin\Desktop\Інша гілка\DM_Project_5\DMM Project\obj\Debug\net8.0\refint\DMM Project.dll
+C:\Users\admin\Desktop\Інша гілка\DM_Project_5\DMM Project\obj\Debug\net8.0\DMM Project.pdb
+C:\Users\admin\Desktop\Інша гілка\DM_Project_5\DMM Project\obj\Debug\net8.0\DMM Project.genruntimeconfig.cache
+C:\Users\admin\Desktop\Інша гілка\DM_Project_5\DMM Project\obj\Debug\net8.0\ref\DMM Project.dll
