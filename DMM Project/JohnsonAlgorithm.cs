@@ -1,5 +1,3 @@
-
-
 using System;
 using System.Collections.Generic;
 
@@ -7,143 +5,117 @@ namespace DMM_Project
 {
     public class JohnsonAlgorithm
     {
-        public readonly Graph graph;
+        private readonly Graph graph;
+        private int V;
 
-        public JohnsonAlgorithm(Graph graph)
+        public JohnsonAlgorithm(Graph g)
         {
-            this.graph = graph;
+            graph = g;
+            V = graph.Vertic;
         }
 
         public int[,] FindAllPairsShortestPaths()
         {
-            int V = graph.Vertic;
-            int[,] dist = new int[V, V];
-
-            // Додаємо нову вершину
-            List<(int to, int weight)>[] extendedAdjList = new List<(int, int)>[V + 1];
-            for (int i = 0; i <= V; i++)
-                extendedAdjList[i] = new List<(int, int)>();
-
+            // нова вершина до графа
+            var newGraph = new Graph(V + 1);
             for (int u = 0; u < V; u++)
-            {
-                foreach (var (v, w) in graph.AdjacencyList[u])
-                    extendedAdjList[u].Add((v, w));
-                extendedAdjList[V].Add((u, 0));
-            }
-
-            // Беллман-Форд
-            int[] h = BellmanFord(V, extendedAdjList);
-            if (h == null)
-            {
-                Console.WriteLine("Граф містить цикл з від’ємною вагою. Розрахунок припинено.");
-                return null;
-            }
-
-            // Перевизначаємо ваги
-            List<(int to, int weight)>[] reweighted = new List<(int, int)>[V];
-            for (int u = 0; u < V; u++)
-            {
-                reweighted[u] = new List<(int, int)>();
-                foreach (var (v, w) in graph.AdjacencyList[u])
+                foreach (var (v, w) in graph.GetAdjacencyList(u))
                 {
-                    int newWeight = w + h[u] - h[v];
-                    reweighted[u].Add((v, newWeight));
+                    if (w >= 0)
+                        newGraph.AddEdge(u, v, w);
                 }
-            }
-
-            // Дейкстра
-            for (int u = 0; u < V; u++)
-            {
-                int[] d = Dijkstra(V, reweighted, u);
-                for (int v = 0; v < V; v++)
-                {
-                    dist[u, v] = d[v] == int.MaxValue ? int.MaxValue : d[v] + h[v] - h[u];
-                }
-            }
-
-            return dist;
-        }
-
-        private int[] BellmanFord(int V, List<(int to, int weight)>[] adj)
-        {
-            int[] dist = new int[V + 1];
-            Array.Fill(dist, int.MaxValue);
-            dist[V] = 0;
 
             for (int i = 0; i < V; i++)
-            {
-                bool updated = false;
-                for (int u = 0; u <= V; u++)
+                newGraph.AddEdge(V, i, 0); // дод. ребра з нової вершини до всіх з вагою 0
+
+            // беллман-форд
+            int[] h = BellmanFord(newGraph, V);
+            if (h == null)
+                throw new Exception("Граф містить цикл з від’ємною вагою");
+
+            // перерахунок ваг
+            var reweightedGraph = new Graph(V);
+            for (int u = 0; u < V; u++)
+                foreach (var (v, w) in graph.GetAdjacencyList(u))
                 {
-                    if (dist[u] == int.MaxValue) continue;
-                    foreach (var (v, w) in adj[u])
+                    if (w >= 0) 
                     {
-                        if (dist[u] + w < dist[v])
-                        {
-                            dist[v] = dist[u] + w;
-                            updated = true;
-                        }
+                        int newWeight = w + h[u] - h[v];
+                        reweightedGraph.AddEdge(u, v, newWeight);
                     }
                 }
-                if (!updated) break;
-            }
 
-            for (int u = 0; u <= V; u++)
+            // dijkstra
+            int[,] dist = new int[V, V];
+            for (int u = 0; u < V; u++)
             {
-                if (dist[u] == int.MaxValue) continue;
-                foreach (var (v, w) in adj[u])
+                int[] d = Dijkstra(reweightedGraph, u);
+                for (int v = 0; v < V; v++)
                 {
-                    if (dist[u] + w < dist[v])
-                    {
-                        Console.WriteLine($"❗ Виявлено цикл з від’ємною вагою між {u} → {v}");
-                        return null;
-                    }
+                    if (d[v] == int.MaxValue)
+                        dist[u, v] = int.MaxValue;
+                    else
+                        dist[u, v] = d[v] + h[v] - h[u]; //оригінальні ваги
                 }
             }
 
             return dist;
         }
 
-        private int[] Dijkstra(int V, List<(int to, int weight)>[] adj, int src)
+        private int[] BellmanFord(Graph g, int source)
         {
-            int[] dist = new int[V];
-            bool[] visited = new bool[V];
+            int[] dist = new int[g.Vertic];
+            Array.Fill(dist, int.MaxValue);
+            dist[source] = 0;
+
+            for (int i = 1; i < g.Vertic; i++)
+            {
+                for (int u = 0; u < g.Vertic; u++)
+                    foreach (var (v, w) in g.GetAdjacencyList(u))
+                    {
+                        if (dist[u] != int.MaxValue && dist[u] + w < dist[v])
+                            dist[v] = dist[u] + w;
+                    }
+            }
+
+            for (int u = 0; u < g.Vertic; u++)
+                foreach (var (v, w) in g.GetAdjacencyList(u))
+                {
+                    if (dist[u] != int.MaxValue && dist[u] + w < dist[v])
+                        return null;
+                }
+
+            return dist;
+        }
+
+        private int[] Dijkstra(Graph g, int src)
+        {
+            int[] dist = new int[g.Vertic];
+            bool[] visited = new bool[g.Vertic];
             Array.Fill(dist, int.MaxValue);
             dist[src] = 0;
 
-            var pq = new SortedSet<(int dist, int node)>();
-            pq.Add((0, src));
-
-            while (pq.Count > 0)
+            for (int i = 0; i < g.Vertic; i++)
             {
-                var (d, u) = GetMin(pq);
-                pq.Remove((d, u));
+                int u = -1;
+                int min = int.MaxValue;
+                for (int j = 0; j < g.Vertic; j++)
+                    if (!visited[j] && dist[j] < min)
+                    {
+                        min = dist[j];
+                        u = j;
+                    }
 
-                if (visited[u]) continue;
+                if (u == -1) break;
+
                 visited[u] = true;
 
-                foreach (var (v, weight) in adj[u])
-                {
-                    if (dist[u] != int.MaxValue && dist[u] + weight < dist[v])
-                    {
-                        if (dist[v] != int.MaxValue)
-                            pq.Remove((dist[v], v));
-
+                foreach (var (v, weight) in g.GetAdjacencyList(u))
+                    if (!visited[v] && dist[u] + weight < dist[v])
                         dist[v] = dist[u] + weight;
-                        pq.Add((dist[v], v));
-                    }
-                }
             }
 
             return dist;
         }
-
-        private (int, int) GetMin(SortedSet<(int dist, int node)> pq)
-        {
-            foreach (var item in pq)
-                return item;
-            return (0, 0);
-        }
     }
 }
-   

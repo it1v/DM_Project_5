@@ -1,53 +1,56 @@
 ﻿using System;
-namespace DMM_Project;
 using DMM_Project;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics;
+using System.Text;
 
-class Program
+namespace DMM_Project
 {
-    static void Main()
+    class Program
     {
-        int vertices = 6;
-        int edges = 12;
-        Graph graph;
-        JohnsonAlgorithm johnson;
-        int[,] dist;
-
-        // Генерація графа без від’ємного циклу
-        do
+        static void Main()
         {
-            graph = Graph.GenerateRandomGraph(vertices, edges, -5, 10);
-            johnson = new JohnsonAlgorithm(graph);
-            dist = johnson.FindAllPairsShortestPaths();
-        }
-        while (dist == null);
+            int vertices = 160;        // Кількість вершин
+            double density = 0.5;     // Щільність графа
 
-        // Виведення з нумерацією
-        Console.WriteLine("Генерований граф:");
-        for (int i = 0; i < graph.Vertic; i++)
-        {
-            foreach (var (to, weight) in graph.AdjacencyList[i])
+            Graph graph = new Graph(vertices);
+            graph.GenerateRandomEdges(density);
+
+            Console.WriteLine("Adjacency List:");
+            graph.PrintAdjacencyList();
+
+            Console.WriteLine("\nAdjacency Matrix:");
+            graph.PrintAdjacencyMatrix();
+
+            Stopwatch sw = new();
+            try
             {
-                Console.WriteLine($"Вершина {i} -> Вершина {to} (вага: {weight})");
+                sw.Start();
+                JohnsonAlgorithm johnson = new JohnsonAlgorithm(graph);
+                var allPairs = johnson.FindAllPairsShortestPaths();
+
+                Console.WriteLine("\nAll Pairs Shortest Paths (Johnson's Algorithm):");
+                for (int i = 0; i < vertices; i++)
+                {
+                    for (int j = 0; j < vertices; j++)
+                    {
+                        if (allPairs[i, j] == int.MaxValue)
+                            Console.Write("  INF");
+                        else
+                            Console.Write($"{allPairs[i, j],5}");
+                    }
+                    Console.WriteLine();
+                }
+                sw.Stop();
             }
-        }
-
-        Console.WriteLine("\nМатриця найкоротших шляхів:");
-        Console.Write("     ");
-        for (int j = 0; j < vertices; j++)
-            Console.Write($"{j,5}");
-        Console.WriteLine();
-
-        for (int i = 0; i < vertices; i++)
-        {
-            Console.Write($"{i,4} ");
-            for (int j = 0; j < vertices; j++)
+            catch (Exception ex)
             {
-                if (dist[i, j] == int.MaxValue)
-                    Console.Write($"{"INF",5}");
-                else
-                    Console.Write($"{dist[i, j],5}");
+                Console.WriteLine($"Error running Johnson's Algorithm: {ex.Message}");
             }
-            Console.WriteLine();
+            Console.WriteLine($"Total Time: {sw.Elapsed.TotalMilliseconds:F6} ms");
+            //Console.WriteLine($"Total Time (s): {sw.Elapsed.TotalSeconds:F6} s");
         }
     }
 }
+
+//На данному етапі 1,2(створення і наповнення графу) ШІ був використаний для ознайомлення і праці з бібліотекою Grphviz(візуалізація графу на картинці), практично весь код написаний в блоці VisualizeWithGraphviz був створений за допомогою ШІ
