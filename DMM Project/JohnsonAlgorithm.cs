@@ -1,3 +1,5 @@
+
+
 using System;
 using System.Collections.Generic;
 
@@ -5,7 +7,7 @@ namespace DMM_Project
 {
     public class JohnsonAlgorithm
     {
-        private readonly Graph graph;
+        public readonly Graph graph;
 
         public JohnsonAlgorithm(Graph graph)
         {
@@ -17,47 +19,45 @@ namespace DMM_Project
             int V = graph.Vertic;
             int[,] dist = new int[V, V];
 
-            //додаємо нову вершину з номерами V до всіх інших вершин з вагою 0
+            // Додаємо нову вершину
             List<(int to, int weight)>[] extendedAdjList = new List<(int, int)>[V + 1];
             for (int i = 0; i <= V; i++)
                 extendedAdjList[i] = new List<(int, int)>();
 
             for (int u = 0; u < V; u++)
             {
-                foreach (var (v, w) in graph.GetAdjacencyList()[u])
+                foreach (var (v, w) in graph.AdjacencyList[u])
                     extendedAdjList[u].Add((v, w));
                 extendedAdjList[V].Add((u, 0));
             }
 
-            //виконуємо Беллмана-Форда
+            // Беллман-Форд
             int[] h = BellmanFord(V, extendedAdjList);
-
             if (h == null)
             {
-                Console.WriteLine("Graph contains a negative-weight cycle");
+                Console.WriteLine("Граф містить цикл з від’ємною вагою. Розрахунок припинено.");
                 return null;
             }
 
-            //перевизначення ваг
+            // Перевизначаємо ваги
             List<(int to, int weight)>[] reweighted = new List<(int, int)>[V];
             for (int u = 0; u < V; u++)
             {
                 reweighted[u] = new List<(int, int)>();
-                foreach (var (v, w) in graph.GetAdjacencyList()[u])
+                foreach (var (v, w) in graph.AdjacencyList[u])
                 {
                     int newWeight = w + h[u] - h[v];
                     reweighted[u].Add((v, newWeight));
                 }
             }
 
-            //запускаємо дейкстру з кожної вершини
+            // Дейкстра
             for (int u = 0; u < V; u++)
             {
                 int[] d = Dijkstra(V, reweighted, u);
                 for (int v = 0; v < V; v++)
                 {
-                    // відновлюємо оригінальні ваги
-                    dist[u, v] = d[v] + h[v] - h[u];
+                    dist[u, v] = d[v] == int.MaxValue ? int.MaxValue : d[v] + h[v] - h[u];
                 }
             }
 
@@ -72,25 +72,32 @@ namespace DMM_Project
 
             for (int i = 0; i < V; i++)
             {
+                bool updated = false;
                 for (int u = 0; u <= V; u++)
                 {
+                    if (dist[u] == int.MaxValue) continue;
                     foreach (var (v, w) in adj[u])
                     {
-                        if (dist[u] != int.MaxValue && dist[u] + w < dist[v])
+                        if (dist[u] + w < dist[v])
                         {
                             dist[v] = dist[u] + w;
+                            updated = true;
                         }
                     }
                 }
+                if (!updated) break;
             }
 
-            // перевірка на від’ємні цикли
             for (int u = 0; u <= V; u++)
             {
+                if (dist[u] == int.MaxValue) continue;
                 foreach (var (v, w) in adj[u])
                 {
-                    if (dist[u] != int.MaxValue && dist[u] + w < dist[v])
-                        return null; // від’ємний цикл
+                    if (dist[u] + w < dist[v])
+                    {
+                        Console.WriteLine($"❗ Виявлено цикл з від’ємною вагою між {u} → {v}");
+                        return null;
+                    }
                 }
             }
 
@@ -104,7 +111,7 @@ namespace DMM_Project
             Array.Fill(dist, int.MaxValue);
             dist[src] = 0;
 
-            SortedSet<(int dist, int node)> pq = new();
+            var pq = new SortedSet<(int dist, int node)>();
             pq.Add((0, src));
 
             while (pq.Count > 0)
@@ -117,9 +124,11 @@ namespace DMM_Project
 
                 foreach (var (v, weight) in adj[u])
                 {
-                    if (dist[u] + weight < dist[v])
+                    if (dist[u] != int.MaxValue && dist[u] + weight < dist[v])
                     {
-                        pq.Remove((dist[v], v));
+                        if (dist[v] != int.MaxValue)
+                            pq.Remove((dist[v], v));
+
                         dist[v] = dist[u] + weight;
                         pq.Add((dist[v], v));
                     }
@@ -136,14 +145,5 @@ namespace DMM_Project
             return (0, 0);
         }
     }
-
-    // щоб граф був доступним для цього класу
-    public static class GraphExtensions
-    {
-        public static List<(int to, int weight)>[] GetAdjacencyList(this Graph graph)
-        {
-            var field = typeof(Graph).GetField("adjacencyList", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            return (List<(int, int)>[])field.GetValue(graph);
-        }
-    }
 }
+   

@@ -1,46 +1,53 @@
 ﻿using System;
-namespace DMM_Project
+namespace DMM_Project;
+using DMM_Project;
+
+class Program
 {
-    class Program
+    static void Main()
     {
-        static void Main()
+        int vertices = 6;
+        int edges = 12;
+        Graph graph;
+        JohnsonAlgorithm johnson;
+        int[,] dist;
+
+        // Генерація графа без від’ємного циклу
+        do
         {
-            int vertic = 30; // розмірність матриці nxn
-            double density = 0.2; // щільність графа
+            graph = Graph.GenerateRandomGraph(vertices, edges, -5, 10);
+            johnson = new JohnsonAlgorithm(graph);
+            dist = johnson.FindAllPairsShortestPaths();
+        }
+        while (dist == null);
 
-            Graph graph = new Graph(vertic); //те шо нам створює граф
-            graph.GenerateRandomEdges(density);
-
-            Console.WriteLine("Adjacency List:");
-            graph.PrintAdjacencyList();//списочок суміжності в консолі
-            Console.WriteLine("\nAdjacency Matrix:");
-            graph.PrintAdjacencyMatrix();//матриця в консолі
-
-            graph.VisualizeWithGraphviz();//малюночок(візуалізація)
-            
-            //На данному етапі 1,2(створення і наповнення графу) ШІ був використаний для ознайомлення і праці з бібліотекою Grphviz(візуалізація графу на картинці), практично весь код написаний в блоці VisualizeWithGraphviz був створений за допомогою ШІ
-            
-            // застосування алгоритму Джонсона
-            JohnsonAlgorithm johnson = new JohnsonAlgorithm(graph);
-            int[,] shortestPaths = johnson.FindAllPairsShortestPaths();
-
-            if (shortestPaths != null)
+        // Виведення з нумерацією
+        Console.WriteLine("Генерований граф:");
+        for (int i = 0; i < graph.Vertic; i++)
+        {
+            foreach (var (to, weight) in graph.AdjacencyList[i])
             {
-                Console.WriteLine("\nShortest paths between all pairs (Johnson's Algorithm):");
-                for (int i = 0; i < vertic; i++)
-                {
-                    for (int j = 0; j < vertic; j++)
-                    {
-                        string output = shortestPaths[i, j] == int.MaxValue ? "INF" : shortestPaths[i, j].ToString();
-                        Console.Write($"{output,5}");
-                    }
-                    Console.WriteLine();
-                }
+                Console.WriteLine($"Вершина {i} -> Вершина {to} (вага: {weight})");
             }
-            else
+        }
+
+        Console.WriteLine("\nМатриця найкоротших шляхів:");
+        Console.Write("     ");
+        for (int j = 0; j < vertices; j++)
+            Console.Write($"{j,5}");
+        Console.WriteLine();
+
+        for (int i = 0; i < vertices; i++)
+        {
+            Console.Write($"{i,4} ");
+            for (int j = 0; j < vertices; j++)
             {
-                Console.WriteLine("The graph contains a negative-weight cycle. Johnson's algorithm cannot be applied.");
+                if (dist[i, j] == int.MaxValue)
+                    Console.Write($"{"INF",5}");
+                else
+                    Console.Write($"{dist[i, j],5}");
             }
+            Console.WriteLine();
         }
     }
 }
