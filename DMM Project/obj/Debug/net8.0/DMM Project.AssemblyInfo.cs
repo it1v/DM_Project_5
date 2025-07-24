@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DMM Project")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bc4cb5bbc453c0bad9412463d5c0a6311958aa4e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+569f7745a103245523fff89f54adfcd7c728ced5")]
 [assembly: System.Reflection.AssemblyProductAttribute("DMM Project")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DMM Project")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -6,8 +6,8 @@ namespace DMM_Project
     {
         static void Main()
         {
-            int vertices = 10;//розмірність матриці nxn
-            double density = 0.2; //так звана щільність
+            int vertices = 40;//розмірність матриці nxn
+            double density = 0.6; //так звана щільність
 
             Graph graph = new Graph(vertices);//те шо нам створює граф
             graph.GenerateRandomEdges(density);
